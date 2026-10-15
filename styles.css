@@ -5,7 +5,7 @@ body{margin:0;background:radial-gradient(circle at top,#f0dce2,transparent 30%),
 a{color:inherit;text-decoration:none}
 .navbar{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:1rem 6vw;background:#f8f5f7e8;backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
 .brand{font-weight:800}.brand span{display:inline-grid;place-items:center;width:2.3rem;height:2.3rem;margin-right:.5rem;border-radius:.75rem;background:var(--primary);color:#fff}
-nav{display:flex;gap:1.25rem;color:var(--muted);font-weight:600}nav a:hover{color:var(--primary)}
+nav{display:flex;gap:1.25rem;color:var(--muted);font-weight:600}nav a:hover{color:var(--primary)}nav a:focus-visible,.button:focus-visible{outline:3px solid #7a1f3055;outline-offset:3px;border-radius:.6rem}
 main{width:min(1100px,calc(100% - 2rem));margin:auto}.hero,.section{padding:4.5rem 0}.hero{min-height:calc(100vh - 70px);display:grid;grid-template-columns:1.2fr .8fr;gap:2rem;align-items:center}
 .eyebrow{margin:0 0 .7rem;color:var(--primary);font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}h1,h2,h3{line-height:1.1}h1{max-width:700px;margin:.3rem 0 1.2rem;font-size:clamp(2.7rem,6vw,5rem)}h2{font-size:clamp(1.8rem,4vw,2.8rem);margin:.3rem 0 1.4rem}.lead{max-width:620px;color:var(--muted);font-size:1.15rem}
 .button{display:inline-flex;justify-content:center;border:0;border-radius:999px;padding:.85rem 1.25rem;font:inherit;font-weight:800;cursor:pointer}.primary{background:linear-gradient(135deg,var(--primary),#a54153);color:#fff;box-shadow:0 10px 24px #7a1f3030}.primary:hover{transform:translateY(-1px)}
