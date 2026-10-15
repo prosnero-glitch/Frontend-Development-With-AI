@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Frontend Helper Project</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <a class="brand" href="#home"><span>AI</span> Frontend Helper Project</a>
+      <nav aria-label="Primary navigation">
+        <a href="#features">Features</a>
+        <a href="#generator">Generator</a>
+        <a href="#preview">Preview</a>
+      </nav>
+    </header>
+
+    <main id="home">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Mini AI frontend project</p>
+          <h1>Turn a blank page into a better starting point.</h1>
+          <p class="lead">
+            Generate friendly UI direction, personalize the result, and explore
+            a visual concept in one focused workspace.
+          </p>
+          <a class="button primary" href="#generator">Try the assistant</a>
+        </div>
+        <aside class="hero-card">
+          <p class="eyebrow">AI toolkit</p>
+          <h2>Simple ideas. Strong interfaces.</h2>
+          <p>Navbar, hero, cards, form, and AI preview components included.</p>
+          <div class="stats"><strong>3+</strong><span>components</span><strong>AI</strong><span>powered</span></div>
+        </aside>
+      </section>
+
+      <section id="features" class="section">
+        <p class="eyebrow">Generated components</p>
+        <h2>Everything needed for a polished mini project.</h2>
+        <div class="cards">
+          <article class="card"><span class="icon">🧠</span><h3>Smart Navbar</h3><p>Clear navigation links keep the experience easy to explore.</p></article>
+          <article class="card"><span class="icon">🦸🏿‍♂️</span><h3>Hero Section</h3><p>Focused copy and a call to action introduce the AI helper.</p></article>
+          <article class="card"><span class="icon">🗂️</span><h3>Reusable Cards</h3><p>Consistent spacing and visual hierarchy make features scannable.</p></article>
+        </div>
+      </section>
+
+      <section id="generator" class="section">
+        <p class="eyebrow">Personalized AI assistant</p>
+        <h2>Generate a UI direction for your next idea.</h2>
+        <div class="generator">
+          <form id="assistant-form" class="form">
+            <label for="userName">Your name</label>
+            <input id="userName" name="userName" placeholder="Enter your name" autocomplete="name" />
+            <label for="projectType">Project type</label>
+            <select id="projectType" name="projectType">
+              <option value="dashboard">Dashboard</option>
+              <option value="portfolio">Portfolio</option>
+              <option value="landing page">Landing page</option>
+              <option value="learning app">Learning app</option>
+            </select>
+            <label for="tone">Tone</label>
+            <select id="tone" name="tone">
+              <option value="friendly">Friendly</option>
+              <option value="professional">Professional</option>
+              <option value="bold">Bold</option>
+              <option value="minimal">Minimal</option>
+            </select>
+            <button class="button primary" type="submit">Generate with AI</button>
+            <p id="assistantStatus" class="status" role="status"></p>
+          </form>
+          <article class="result" aria-live="polite">
+            <p class="eyebrow">Your result</p>
+            <h3 id="greeting">Welcome back, Prosper.</h3>
+            <p id="promptText">Enter your preferences to generate a personalized UI prompt.</p>
+            <div><span class="tag">Personalized</span><span class="tag">Reusable</span><span class="tag">Responsive</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="preview" class="section">
+        <p class="eyebrow">AI image preview</p>
+        <h2>DALL·E-ready concept art.</h2>
+        <div class="preview">
+          <img id="conceptImage" src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1000&q=85" alt="Abstract colorful AI concept art" />
+          <div><h3>Visual direction</h3><p>On Netlify, the secure OpenAI function can replace this preview with a DALL·E-generated image for the selected project.</p></div>
+        </div>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
