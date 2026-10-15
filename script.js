@@ -5,35 +5,76 @@ const toneInput = document.querySelector("#tone");
 const greeting = document.querySelector("#greeting");
 const promptText = document.querySelector("#promptText");
 const status = document.querySelector("#assistantStatus");
+const conceptImage = document.querySelector("#conceptImage");
+const conceptNote = document.querySelector("#conceptNote");
+
+const { createGreeting, createFallbackResponse } = window.AIHelperUtils;
+
+function updateGreeting(name) {
+  greeting.textContent = createGreeting(name);
+}
+
+function saveNamePreference(name) {
+  if (name) {
+    localStorage.setItem("ai-helper-name", name);
+    return;
+  }
+  localStorage.removeItem("ai-helper-name");
+}
+
+function applyResult(result) {
+  promptText.textContent = result.message;
+  conceptImage.src = result.imageUrl;
+  conceptImage.alt = result.imageAlt;
+}
+
+async function getAssistantResponse(payload) {
+  const fallback = createFallbackResponse(payload);
+  try {
+    const response = await fetch("/.netlify/functions/ai-helper", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!response.ok) {
+      throw new Error("Function response was not successful");
+    }
+    const data = await response.json();
+    if (!data?.message) {
+      throw new Error("Missing assistant message");
+    }
+    return data;
+  } catch {
+    return fallback;
+  }
+}
 
 const savedName = localStorage.getItem("ai-helper-name");
 if (savedName) {
   nameInput.value = savedName;
-  greeting.textContent = `Welcome back, ${savedName}.`;
 }
-
-function createPrompt(name, project, tone) {
-  const toneText = {
-    friendly: "warm and approachable",
-    professional: "clean and business-ready",
-    bold: "confident and eye-catching",
-    minimal: "simple and elegant",
-  }[tone];
-  return `Hi ${name.trim() || "creator"}, create a ${toneText} ${project} interface with a navbar, hero section, and three reusable cards.`;
-}
+updateGreeting(savedName);
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
-  const name = nameInput.value.trim();
-  const project = projectInput.value;
-  const tone = toneInput.value;
-  if (name) {
-    localStorage.setItem("ai-helper-name", name);
-    greeting.textContent = `Welcome back, ${name}.`;
-  } else {
-    localStorage.removeItem("ai-helper-name");
-    greeting.textContent = "Welcome back, creator.";
+  const payload = {
+    name: nameInput.value.trim(),
+    projectType: projectInput.value,
+    tone: toneInput.value,
+  };
+  saveNamePreference(payload.name);
+  updateGreeting(payload.name);
+  status.textContent = "Generating AI helper text...";
+
+  const result = await getAssistantResponse(payload);
+  applyResult(result);
+
+  if (result.source === "openai") {
+    status.textContent = "Generated securely with OpenAI via server-side function.";
+    conceptNote.textContent = "Live OpenAI response delivered through a secure server route.";
+    return;
   }
-  promptText.textContent = createPrompt(name, project, tone);
-  status.textContent = "Local personalized demo ready. Connect the secure OpenAI function for live text and DALL·E images.";
+
+  status.textContent = "OpenAI unavailable, showing local fallback guidance.";
+  conceptNote.textContent = "Fallback mode is active. Add OPENAI_API_KEY and run with Netlify for live AI output.";
 });
